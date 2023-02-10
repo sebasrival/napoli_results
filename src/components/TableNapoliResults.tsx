@@ -11,7 +11,7 @@ export const TableNapoliResults = (props) => {
     const [categoryFilter, setCategoryFilter] = useState('')
 
     const isCategorySame = (categoryName) => {
-        return categoryFilter === '' || categoryName === categoryFilter
+        return  categoryName === categoryFilter
     }
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export const TableNapoliResults = (props) => {
         })
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(categoryFilter)
     }, [categoryFilter])
 
@@ -47,28 +47,37 @@ export const TableNapoliResults = (props) => {
                                 Corredor
                             </th>
                             <th scope="col" className="px-3 py-3">
-                                Hora de Llegada / Diferencia
+                                Tiempo
                             </th>
                             <th scope="col" className="px-3 py-3">
-                                Tiempo total
+                                Laps
+                            </th>
+                            <th scope="col" className="px-3 py-3">
+                                Diferencia
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {napoliResults.filter((result) => isCategorySame(result.category_name)).map((result) => (
-                            <tr key={result.id} className="border-b bg-gray-900 border-gray-700">
-                                <th scope="row" className="px-3 py-4 font-medium text-white">
+                        {napoliResults.filter((result) => isCategorySame(result.category_name)).filter((result) => result.full_name !== null).map((result) => (
+                            <tr key={result.id} className="border-b bg-gray-900 border-gray-700 text-white">
+                                <th scope="row" className="px-3 py-4 font-medium">
                                     {result.position}
                                 </th>
                                 <td className="px-3 py-4">
-                                    <span>{result.full_name}</span>
+                                    <div className="flex flex-col">
+                                        <span><b>{result.full_name} </b> ({result.plate})</span>
+                                        <i>{result.team}</i>
+                                    </div>
+                                </td>
+                                <td className="px-3 py-4 flex flex-col">
+                                    <b><span>{result.total_race_time}</span></b>
+                                    <span>{result.avg_} <i>km/h</i></span>
                                 </td>
                                 <td className="px-3 py-4">
-                                    <span>{result.arrival_time}</span> /
-                                    <span> {result.diff_to_winner}</span>
+                                    <span>{result.laps}</span>
                                 </td>
                                 <td className="px-3 py-4">
-                                    <span>{result.total_race_time}</span>
+                                    <span>{result.diff_to_winner}</span>
                                 </td>
                             </tr>
                         ))}
