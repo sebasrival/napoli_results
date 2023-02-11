@@ -19,4 +19,5 @@ export type NapoliResultsType = {
   category_name?: string
   diff_to_winner?: string
   total_race_time?: string
+  country?: string
 }

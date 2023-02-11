@@ -5,7 +5,13 @@ import axios from "axios";
 import { CategoryNapoliList } from "./CategoryNapoliList";
 import Flag from 'react-flagkit';
 
-
+const flags = {
+    Paraguay: 'PY',
+    Argentina: 'ARG',
+    Brasil: 'BR',
+    Alemania: 'DE',
+    Chile: 'CL',
+}
 
 export const TableNapoliResults = (props) => {
 
@@ -118,7 +124,7 @@ export const TableNapoliResults = (props) => {
                                         {result.position}
                                     </th>
                                     <td className="px-1 border-r border-gray-700" width={30} style={{ minWidth: '20px' }}>
-                                        <Flag country="PY" />
+                                        {result.country ? <Flag country={flags[result.country ? result.country : '']} /> : ''}
                                     </td>
                                     <td className="px-1 border-r border-gray-700 h-auto">
                                         <div className="flex flex-col">
