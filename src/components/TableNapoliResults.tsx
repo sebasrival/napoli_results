@@ -63,10 +63,29 @@ export const TableNapoliResults = (props) => {
         </div>
     }
 
+    const getUpdateNapoliResults = () => {
+        setNapoliResultsFiltered([])
+        setLoading(true)
+        setError(false)
+        axios({
+            url: `${urls.results}`,
+            method: 'GET'
+        }).then((res) => {
+            setNapoliResults(res.data)
+            setLoading(false)
+            console.log(res.data)
+        }).catch((error) => {
+            setLoading(false)
+            setError(true)
+            console.log(error)
+        })
+    }
+
     return (
         <div className="flex flex-col py-5 gap-5">
-            <div className="flex flex-row">
+            <div className="flex flex-row w-full flex-nowrap justify-between">
                 <h1 className="text-2xl font-semibold">Categorias</h1>
+                <button type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800   font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" onClick={() => { getUpdateNapoliResults() }}>Actualizar Resultados</button>
             </div>
             <CategoryNapoliList setCategory={setCategoryFilter} />
             {!error &&
