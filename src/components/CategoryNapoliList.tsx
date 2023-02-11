@@ -9,7 +9,7 @@ type PropsType = {
   setCategory: (category: string) => void
 }
 
-export function CategoryNapoliList({ setCategory, ...props }: PropsType) {
+export function CategoryNapoliList({ setCategory }: PropsType) {
   const [query, setQuery] = useState('')
   const [napoliCategories, setNapoliCategories] = useState<NapoliCategoryType[]>([])
   const [selected, setSelected] = useState<NapoliCategoryType>({ name: '' })
