@@ -12,7 +12,7 @@ type PropsType = {
 export function CategoryNapoliList({ setCategory, ...props }: PropsType) {
   const [query, setQuery] = useState('')
   const [napoliCategories, setNapoliCategories] = useState<NapoliCategoryType[]>([])
-  const [selected, setSelected] = useState<NapoliCategoryType>({name:''})
+  const [selected, setSelected] = useState<NapoliCategoryType>({ name: '' })
 
   const filteredCategory =
     query === ''
@@ -24,26 +24,34 @@ export function CategoryNapoliList({ setCategory, ...props }: PropsType) {
           .includes(query.toLowerCase().replace(/\s+/g, ''))
       )
 
+  const categorySortName = (a, b) => {
+    if (a.name > b.name) return 1
+    if (a.name < b.name) return -1
+    return 0;
+  }
+
+  const dataProcessingCategory = (data: NapoliCategoryType[]) => {
+    return data.filter(cat => cat.name !== "").sort(categorySortName)
+  }
+
   useEffect(() => {
     axios({
       url: `${urls.categories}`,
       method: 'GET',
     }).then((res) => {
-      setNapoliCategories(res.data)
-      console.log(res.data)
+      const temp = dataProcessingCategory(res.data)
+      setNapoliCategories(temp)
+      setSelected(temp[0])
     }).catch((error) => {
       console.log(error)
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(()=>{
-    console.log(selected)
-}, [selected])
-
-  useEffect(()=>{
+  useEffect(() => {
     setCategory(selected?.name)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[selected])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected])
 
   return (
     <div className="flex flex-col z-10">
