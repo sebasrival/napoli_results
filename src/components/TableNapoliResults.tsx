@@ -133,7 +133,7 @@ export const TableNapoliResults = (props) => {
                                         </div>
                                     </td>
                                     <td className="px-1 border-r border-gray-700 text-end">
-                                        <b>{result.arrival_time}</b>
+                                        <b>{result.total_race_time}</b>
                                         <br />
                                         {result.avg_}<i>km/h</i>
                                     </td>
