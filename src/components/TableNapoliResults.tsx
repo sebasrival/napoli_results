@@ -7,7 +7,7 @@ import Flag from 'react-flagkit';
 
 const flags = {
     Paraguay: 'PY',
-    Argentina: 'ARG',
+    Argentina: 'AR',
     Brasil: 'BR',
     Alemania: 'DE',
     Chile: 'CL',
